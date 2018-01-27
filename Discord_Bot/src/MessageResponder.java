@@ -7,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
@@ -20,17 +19,26 @@ public class MessageResponder extends ListenerAdapter{
 	public void onMessageReceived (MessageReceivedEvent event) {
 		String sendMessageBack;
 		String message = event.getMessage().getContent();
+	
+	
 		
 		if(message.startsWith(".help"))	
 		{
 			String name = event.getAuthor().getName();
-			event.getTextChannel().sendMessage("I can't help you please go ask someone else " + name).queue();
+			event.getTextChannel().sendMessage("I can't help you please go ask someone else " + name).queue();//replace with useful help later
 		}
 		else if(message.startsWith(".Find"))
 		{
+			
+			
+			
+			
+			message = message.substring(6);//remove the .Find and a space after from the string
+			message = message.toLowerCase();//sever only takes in lower case searches
+			message = message.replaceAll("\\s" ,"-");//converts spaces to dashes
 			 HttpURLConnection connection = null;
 			try {
-				URL url = new URL("https://kitsu.io/api/edge/anime?filter%5Bslug%5D=cowboy-bebop");
+				URL url = new URL("https://kitsu.io/api/edge/anime?filter%5Bslug%5D=" + message);
 				connection = (HttpURLConnection) url.openConnection();
 				   connection.setRequestMethod("GET");//set as get request
 				   connection.setRequestProperty("Accept", 
@@ -47,7 +55,7 @@ public class MessageResponder extends ListenerAdapter{
 				    //Get Response  
 				    InputStream is = connection.getInputStream();
 				    BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-				    StringBuilder response = new StringBuilder(); // or StringBuffer if Java version 5+
+				    StringBuilder response = new StringBuilder();
 				    String line;
 				    while ((line = rd.readLine()) != null) {
 				      response.append(line);
@@ -63,7 +71,12 @@ public class MessageResponder extends ListenerAdapter{
 				 
 				   
 				    
-				    event.getTextChannel().sendMessage("The name of the show is " + a.data.get(0).attributes.titles.en).queue();
+				    event.getTextChannel().sendMessage("The english name of the show is " + a.data.get(0).attributes.titles.en +
+				    		"\n the romanized name is " + a.data.get(0).attributes.titles.en_jp +
+				    		"\nThere are " +  a.data.get(0).attributes.episodeCount + " episodes of this show" +
+				    		"\n The average score of the show is " + a.data.get(0).attributes.averageRating +
+				    		"\n" + a.data.get(0).attributes.posterImage.original
+				    		).queue();//Display the information about the show
 				    
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
