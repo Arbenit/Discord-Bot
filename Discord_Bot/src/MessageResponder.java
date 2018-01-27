@@ -7,11 +7,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.json.JSONArray;
 
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
+
+import com.google.gson.*;
 
 public class MessageResponder extends ListenerAdapter{
 	
@@ -27,7 +28,6 @@ public class MessageResponder extends ListenerAdapter{
 		}
 		else if(message.startsWith(".Find"))
 		{
-
 			 HttpURLConnection connection = null;
 			try {
 				URL url = new URL("https://kitsu.io/api/edge/anime?filter%5Bslug%5D=cowboy-bebop");
@@ -56,16 +56,23 @@ public class MessageResponder extends ListenerAdapter{
 				    rd.close();
 				    String pleaseWork =  response.toString();
 				
-				 int loc = pleaseWork.indexOf("slug");
-				   String print = pleaseWork.substring(loc + 7,loc+19);
+				    Gson gson = new Gson();
 				    
-				    event.getTextChannel().sendMessage(print).queue();
+
+				  Anime a = gson.fromJson(pleaseWork, Anime.class);
+				 
+				   
+				    
+				    event.getTextChannel().sendMessage("The name of the show is " + a.data.get(0).attributes.titles.en).queue();
 				    
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}catch (Exception e)
+			{
 				e.printStackTrace();
 			}finally {
 			    if (connection != null) {

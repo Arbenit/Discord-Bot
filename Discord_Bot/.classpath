@@ -25,5 +25,7 @@
 	<classpathentry kind="lib" path="C:/Users/arbenit/Desktop/Editer/Github/Discord-Bot/Discord_Bot/libs/httpmime-4.2.5.jar"/>
 	<classpathentry kind="lib" path="C:/Users/arbenit/Desktop/Editer/Github/Discord-Bot/Discord_Bot/libs/javax.ws.rs-api-2.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/arbenit/Desktop/Editer/Github/Discord-Bot/Discord_Bot/libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arbenit/Desktop/Editer/Github/Discord-Bot/Discord_Bot/libs/gson-2.8.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/arbenit/Desktop/Editer/Github/Discord-Bot/Discord_Bot/libs/gson-2.8.2.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
