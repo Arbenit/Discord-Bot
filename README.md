@@ -8,7 +8,9 @@ Commands that can be used from discord
 
 .Find - use this to find anime ie .Find Naruto
 
-        Displays the Title in en, en_jp, ja_jp ie The Ancient Magus' Bride, Mahou Tsukai no Yome , 魔法使いの嫁
+        Displays the Title in english and romanized japanese ie The Ancient Magus' Bride and Mahou Tsukai no Yome.
         Displays the average rating of the show out of 100 ie 88.55
-        Displays the status of the anime ie current , finished , tba
+        Displays the status of the anime ie current , finished , tba --- to be added
         Displays episode count ie 26
+        Displays an image of the anime
+        
