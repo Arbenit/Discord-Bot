@@ -71,11 +71,11 @@ public class MessageResponder extends ListenerAdapter{
 				 
 				   
 				    
-				    event.getTextChannel().sendMessage("The english name of the show is " + a.data.get(0).attributes.titles.en +
-				    		"\n the romanized name is " + a.data.get(0).attributes.titles.en_jp +
-				    		"\nThere are " +  a.data.get(0).attributes.episodeCount + " episodes of this show" +
-				    		"\n The average score of the show is " + a.data.get(0).attributes.averageRating +
-				    		"\n" + a.data.get(0).attributes.posterImage.original
+				    event.getTextChannel().sendMessage("The english name of the show is " + a.data.get(0).attributes.titles.en + 
+				    		"\n the romanized name is " + a.data.get(0).attributes.titles.en_jp +	//Titles
+				    		"\nThere are " +  a.data.get(0).attributes.episodeCount + " episodes of this show" + // episode count
+				    		"\n The average score of the show is " + a.data.get(0).attributes.averageRating +	// average rating
+				    		"\n" + a.data.get(0).attributes.posterImage.original // poster image
 				    		).queue();//Display the information about the show
 				    
 			} catch (MalformedURLException e) {

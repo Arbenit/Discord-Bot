@@ -12,3 +12,8 @@ Commands that can be used from discord
         Displays the average rating of the show out of 100 ie 88.55
         Displays the status of the anime ie current , finished , tba
         Displays episode count ie 26
+
+		
+		
+		
+		
