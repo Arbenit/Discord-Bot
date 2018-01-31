@@ -1,4 +1,3 @@
-import java.util.List;
 //holds the data of the anime
 public class Data {
 	public String id;

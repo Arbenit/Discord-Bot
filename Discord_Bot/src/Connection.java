@@ -14,12 +14,10 @@ public class Connection {
 			discord = new JDABuilder(AccountType.BOT).setToken(Constants.discordToken).buildBlocking();
 		} catch (LoginException | IllegalArgumentException | InterruptedException | RateLimitedException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Something went wrong");
+			System.out.println("Something went wrong and the bot could not connect");
 		}
 		
 		discord.addEventListener(new MessageResponder());
-	
-		
 		
 	}
 

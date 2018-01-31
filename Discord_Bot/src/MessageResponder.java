@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -16,8 +15,8 @@ import com.google.gson.*;
 public class MessageResponder extends ListenerAdapter{
 	
 
+	  
 	public void onMessageReceived (MessageReceivedEvent event) {
-		String sendMessageBack;
 		String message = event.getMessage().getContent();
 	
 	
@@ -29,9 +28,6 @@ public class MessageResponder extends ListenerAdapter{
 		}
 		else if(message.startsWith(".Find"))
 		{
-			
-			
-			
 			
 			message = message.substring(6);//remove the .Find and a space after from the string
 			message = message.toLowerCase();//sever only takes in lower case searches
@@ -62,21 +58,31 @@ public class MessageResponder extends ListenerAdapter{
 				      response.append('\r');
 				    }
 				    rd.close();
-				    String pleaseWork =  response.toString();
-				
+	
 				    Gson gson = new Gson();
 				    
 
-				  Anime a = gson.fromJson(pleaseWork, Anime.class);
+				  Anime a = gson.fromJson(response.toString(), Anime.class);//store the json in the Anime class
 				 
-				   
+
 				    
-				    event.getTextChannel().sendMessage("The english name of the show is " + a.data.get(0).attributes.titles.en + 
-				    		"\n the romanized name is " + a.data.get(0).attributes.titles.en_jp +	//Titles
-				    		"\nThere are " +  a.data.get(0).attributes.episodeCount + " episodes of this show" + // episode count
-				    		"\n The average score of the show is " + a.data.get(0).attributes.averageRating +	// average rating
-				    		"\n" + a.data.get(0).attributes.posterImage.original // poster image
-				    		).queue();//Display the information about the show
+				   if(a.data.size() != 0)//if the size is not 0 that means it find an anime
+				   {
+					   
+					   if(a.data.get(0).attributes.episodeCount == null)
+						   a.data.get(0).attributes.episodeCount = "unknown";
+					   
+					   event.getTextChannel().sendMessage("The english name of the show is " + a.data.get(0).attributes.titles.en + 
+							   	"\nThe romanized name is " + a.data.get(0).attributes.titles.en_jp +	//Titles
+					    		"\nThere are " +  a.data.get(0).attributes.episodeCount + " episodes of this show" + // episode count
+					    		"\nThe average score of the show is " + a.data.get(0).attributes.averageRating +	// average rating
+					    		"\n" + a.data.get(0).attributes.posterImage.original // poster image
+					    		).queue();//Display the information about the show
+				   }
+				   else
+					   event.getTextChannel().sendMessage("No anime found with that name").queue();
+				   
+				  
 				    
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
@@ -95,4 +101,5 @@ public class MessageResponder extends ListenerAdapter{
 			
 		}
 	}
+	
 }
