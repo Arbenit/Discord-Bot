@@ -1,4 +1,3 @@
-import java.util.List;
 //Attributes of an anime
 public class Attributes {
 	
@@ -8,4 +7,6 @@ public class Attributes {
 	public String updatedAt;
 	public String averageRating;
 	public String episodeCount;
+	public String popularityRank;
+	public String ratingRank;
 }
